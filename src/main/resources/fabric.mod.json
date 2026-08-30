@@ -17,6 +17,9 @@
 	"entrypoints": {
 		"main": [
 			"net.fayber.protectionelytra.ProtectionElytraMod"
+		],
+		"modmenu": [
+			"net.fayber.protectionelytra.compat.ProtectionElytraModMenu"
 		]
 	},
 	"mixins": [
@@ -27,5 +30,9 @@
 		"minecraft": ">=26.2 <26.3",
 		"java": ">=25",
 		"fabric-api": "*"
+	},
+	"suggests": {
+		"modmenu": "*",
+		"cloth-config": "*"
 	}
 }
