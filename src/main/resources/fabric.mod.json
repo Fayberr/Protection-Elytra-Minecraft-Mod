@@ -1,0 +1,31 @@
+{
+	"schemaVersion": 1,
+	"id": "protection_elytra",
+	"version": "${version}",
+	"name": "Protection Elytra",
+	"description": "Server-side mod allowing players to enchant Elytras with Protection in an Anvil. Vanilla client compatible.",
+	"authors": [
+		"Fayber"
+	],
+	"contact": {
+		"homepage": "https://github.com/Fayberr/Protection-Elytra-Minecraft-Mod",
+		"sources": "https://github.com/Fayberr/Protection-Elytra-Minecraft-Mod"
+	},
+	"license": "GPL-3.0-or-later",
+	"icon": "assets/protection_elytra/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"net.fayber.protectionelytra.ProtectionElytraMod"
+		]
+	},
+	"mixins": [
+		"protection_elytra.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=${loader_version}",
+		"minecraft": ">=26.2 <26.3",
+		"java": ">=25",
+		"fabric-api": "*"
+	}
+}
