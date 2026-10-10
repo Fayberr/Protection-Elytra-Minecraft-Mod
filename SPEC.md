@@ -1,7 +1,7 @@
 # Protection Elytra Mod Specification & Architecture
 
 ## Overview
-**Protection Elytra** is a lightweight, server-side Fabric mod for Minecraft 26.1.x and 26.2 that allows players to enchant Elytras with Protection (and other armor protection enchantments) using an Anvil.
+**Protection Elytra** is a lightweight, server-side Fabric mod for Minecraft 26.1.x, 26.2 and 26.3 that allows players to enchant Elytras with Protection (and other armor protection enchantments) using an Anvil.
 
 ---
 
@@ -43,16 +43,12 @@ net.fayber.protectionelytra
     └── EnchantmentMixin.java         # Hooks Enchantment.canEnchant(ItemStack) for Elytra
 ```
 
-### Data Tags
-* `data/minecraft/tags/item/enchantable/chest_armor.json`: Adds `minecraft:elytra`
-* `data/minecraft/tags/item/enchantable/armor.json`: Adds `minecraft:elytra`
-* `data/minecraft/tags/item/enchantable/equippable.json`: Adds `minecraft:elytra`
-
----
+### Enchantability
+The mixin on `Enchantment.canEnchant` is the only gate. Item tags under `data/minecraft/tags/item/enchantable/` were removed because vanilla accepted them before the mixin ran, which made the config toggles do nothing.
 
 ## 3. Build & Compatibility
 
-* **Target MC Versions**: `26.1.x-fabric` and `26.2-fabric`
+* **Target MC Versions**: `26.1.x-fabric`, `26.2-fabric` and `26.3-fabric`
 * **Java Target**: Java 25 (`options.release = 25`)
-* **Loom**: `1.17.19` (unobfuscated 26.x Mojang mappings, no refmap)
+* **Loom**: `1.17.19` (`1.18.4` on 26.3) (unobfuscated 26.x Mojang mappings, no refmap)
 * **License**: GPL-3.0-or-later, Copyright 2026 Fayber.

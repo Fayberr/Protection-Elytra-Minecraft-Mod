@@ -2,6 +2,7 @@ package net.fayber.protectionelytra.logic;
 
 import net.fayber.protectionelytra.config.ConfigManager;
 import net.fayber.protectionelytra.config.ProtectionElytraConfig;
+import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.enchantment.Enchantment;
 
@@ -9,36 +10,27 @@ public class ProtectionElytraLogic {
 
     public static boolean canEnchantElytra(Enchantment enchantment) {
         ProtectionElytraConfig config = ConfigManager.get();
-        if (!config.enabled) {
+        if (!config.enabled || !enchantment.matchingSlot(EquipmentSlot.CHEST)) {
             return false;
         }
 
-        // If the enchantment matches chest armor slot
-        if (enchantment.matchingSlot(EquipmentSlot.CHEST)) {
-            String desc = enchantment.description().getString().toLowerCase();
-
-            if (desc.contains("protection") || desc.contains("schutz")) {
-                if (desc.contains("fire") || desc.contains("feuer")) {
+        // The translation key is language independent, unlike the rendered name.
+        if (enchantment.description().getContents() instanceof TranslatableContents tc) {
+            switch (tc.getKey()) {
+                case "enchantment.minecraft.protection":
+                    return config.allowProtection;
+                case "enchantment.minecraft.fire_protection":
                     return config.allowFireProtection;
-                }
-                if (desc.contains("blast") || desc.contains("explosions")) {
+                case "enchantment.minecraft.blast_protection":
                     return config.allowBlastProtection;
-                }
-                if (desc.contains("projectile") || desc.contains("schuss")) {
+                case "enchantment.minecraft.projectile_protection":
                     return config.allowProjectileProtection;
-                }
-                return config.allowProtection;
-            }
-
-            if (desc.contains("thorns") || desc.contains("dornen")) {
-                return config.allowThorns;
-            }
-
-            if (config.allowAllArmorEnchantments) {
-                return true;
+                case "enchantment.minecraft.thorns":
+                    return config.allowThorns;
+                default:
+                    break;
             }
         }
-
-        return false;
+        return config.allowAllArmorEnchantments;
     }
 }
