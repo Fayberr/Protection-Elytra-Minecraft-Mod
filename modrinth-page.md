@@ -23,5 +23,5 @@ Lets you put protection enchantments on an Elytra. Combine an Elytra with an enc
 ## Notes
 
 - Runs on the server. The integrated server in singleplayer works too, and clients do not need the mod to join.
-- Requires Fabric API. Minecraft 26.3.
+- Requires Fabric API.
 - Config file: `config/protection_elytra.json`.
